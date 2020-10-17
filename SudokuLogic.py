@@ -45,22 +45,16 @@ def crearCuadrantesFilasColumnas(tablero):
         if fila%3 == 0 and fila>0:
             # Sumar 3 cada vez se pasen 3 filas para designar el numero del cuadrante
             cuadranteF = fila//3*3
+
+        # Revisar si la columna pasó las 3 columnas correspondientes a un cuadrante
+        if columna%3 == 0:
+            cuadranteC = columna//3 + 1
         
         # Determinar numero del cuadrante 
         cuadrante = cuadranteF + cuadranteC
         # Agregar la posicion de la celda al cuadrante correspondiente
         cuadrantes[cuadrante] = cuadrantes.get(cuadrante, list())
-        cuadrantes[cuadrante].append((fila, columna))
-
-        # Revisar 1 cada vez que pasen 3 columnas
-        if (columna + 1)%3 == 0:
-            cuadranteC +=1
-        # Cunado se hayan revisado todas las columnas regresar al cuadrante de la izquierda
-        if columna + 1 == 9: 
-            cuadranteC = 1
-        
-
-        
+        cuadrantes[cuadrante].append((fila, columna))        
 
     return cuadrantes
 
