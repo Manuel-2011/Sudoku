@@ -6,13 +6,12 @@ Created on Fri Oct 16 17:31:13 2020
 """
 
 def makeSudoku():
-    tablero = []
+    tablero = dict()
     adelantar = 0
     for fila in range(9):
         n = adelantar + 1
-        tablero.append(list())
         for columna in range(9):
-            tablero[fila].append(n)
+            tablero[fila, columna] = n
             if n == 9:
                 n = 1
             else:
@@ -24,26 +23,45 @@ def makeSudoku():
 tablero = makeSudoku()
 print(tablero)
 
-def evaluarCuadrantes(tablero):
+def crearCuadrantesFilasColumnas(tablero):
     cuadrantes = dict()
-    cuadranteF = 1
-    cuadranteC = 0
-    indiceF = 1
-    for fila in tablero:
-        
-        indiceC = 1
-        for celda in fila:
-            cuadrante = cuadranteF + cuadranteC
-            cuadrantes[cuadrante] = cuadrantes.get(cuadrante, list())
-            cuadrantes[cuadrante].append(celda)
-            if indiceC%3 == 0:
-                cuadranteC +=1
-            indiceC += 1
-        
-        if indiceF%3 == 0:
-            cuadranteF += 3
-            
-        cuadranteC = 0
-        indiceF += 1
+    filas = dict()
+    columnas = dict()
 
-print(evaluarCuadrantes(tablero))
+    # cuadrantes del sudoku:
+    #   1, 2, 3
+    #   4, 5, 6
+    #   7, 8, 9
+    # cuadranteF: Fila en la que se hace un cambio de cuadrante
+    # cuadranteC: Columna en la que se hace un cambio de cuadrante
+    cuadranteF = 0
+    cuadranteC = 1
+
+
+    # loop por cada  celda del tablero
+    for fila, columna in tablero:
+
+        # Revisar si la fila pasó las 3 filas correspondientes a un cuadrante
+        if fila%3 == 0 and fila>0:
+            # Sumar 3 cada vez se pasen 3 filas para designar el numero del cuadrante
+            cuadranteF = fila//3*3
+        
+        # Determinar numero del cuadrante 
+        cuadrante = cuadranteF + cuadranteC
+        # Agregar la posicion de la celda al cuadrante correspondiente
+        cuadrantes[cuadrante] = cuadrantes.get(cuadrante, list())
+        cuadrantes[cuadrante].append((fila, columna))
+
+        # Revisar 1 cada vez que pasen 3 columnas
+        if (columna + 1)%3 == 0:
+            cuadranteC +=1
+        # Cunado se hayan revisado todas las columnas regresar al cuadrante de la izquierda
+        if columna + 1 == 9: 
+            cuadranteC = 1
+        
+
+        
+
+    return cuadrantes
+
+print(crearCuadrantesFilasColumnas(tablero))
