@@ -1,0 +1,47 @@
+/* Estilo general del tablero */
+.tableroSudoku {
+    background-color: rgb(240,240,240);
+    margin: 200px auto;
+    width: 504px;
+    height: 504px;
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    padding: 2px;
+}
+.fila {
+    /* background-color: aqua; */
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+.columna {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.celda {
+ 
+    /* background-color: antiquewhite; */
+}
+
+/* Dibujar el marco exterior del tablero */
+.tableroSudoku {
+    border-radius: 5px;
+    border: #000000 2px solid;
+    box-shadow: #868686 0px 0px 20px 5px;
+}
+
+/* Dibujar las divisiones por cuadrante */
+#fila3, #fila6 {
+    border-bottom: #000000 4px solid;
+}
+#columna3, #columna6 {
+    border-right: #000000 2px solid;
+}
+
+/* Dibujar las divisiones para cada celda */
+#fila1, #fila2, #fila4, #fila5, #fila7, #fila8 {
+    border-bottom: #000000 1px solid;
+}
+#columna1, #columna2, #columna4, #columna5, #columna7, #columna8 {
+    border-right: #000000 1px solid;
+}
