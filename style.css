@@ -1,5 +1,5 @@
 /* Estilo general del tablero */
-.tableroSudoku {
+#tableroSudoku {
     background-color: rgb(240,240,240);
     margin: 200px auto;
     width: 504px;
@@ -24,9 +24,9 @@
 }
 
 /* Dibujar el marco exterior del tablero */
-.tableroSudoku {
+#tableroSudoku {
     border-radius: 5px;
-    border: #000000 2px solid;
+    border: #000000 4px solid;
     box-shadow: #868686 0px 0px 20px 5px;
 }
 
