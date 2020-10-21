@@ -82,10 +82,10 @@ tablero1 = {
     '(8,8)': {'valor': "4", 'fila': '8', 'columna': '8'},
 }
 
-let cuadrantes = {};
-let filas = {};
-let columnas = {};
 function crearCuadrantesFilasColumnas(tablero) {
+    let cuadrantes = {};
+    let filas = {};
+    let columnas = {};
     // Crear cudrantes
     //////////////////////////////////////////
 

@@ -1,15 +1,19 @@
 // Crear variable con el tablero para agregrar eventos
-const tablero = document.getElementById('tableroSudoku');
+let tablero = document.getElementById('tableroSudoku');
 // Crear variable global con los valores del tablero
 let valoresTablero = {};
 
 // Cuando se haga click en el tablero llamar función de leer el tablero
 tablero.addEventListener('click', (e)=>{
+    tablero = document.getElementById('tableroSudoku');
     readSudoku(tablero);
 });
 
 // funcion de leer los valores del tablero
 function readSudoku(tablero) {
+    // Reiniciar objeto con los valores del tablero
+    valoresTablero = {};
+
     filasE = tablero.children;
     // Iterar por cada fila
     for (let f=0; f < filasE.length; f++) {
