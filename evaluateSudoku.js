@@ -127,16 +127,39 @@ function crearCuadrantesFilasColumnas(tablero) {
     //////////////////////////////////////////
 
         // Revisar si la fila ya esta creada y si no crear la la lista para la fila
-    //     filas[fila] = filas.get(fila, list())
-    //     filas[fila].append(tablero[fila, columna])
+        if (!(fila in filas)) {
+            filas[fila] = [];
+        } 
+        filas[fila].push(casilla);
 
     // // Crear columnas
     // //////////////////////////////////////////
 
     //     // Revisar si la columna ya esta creada y si no crear la la lista para la columna
-    //     columnas[columna] = columnas.get(columna, list())
-    //     columnas[columna].append(tablero[fila, columna])
+        if (!(columna in columnas)) {
+            columnas[columna] = [];
+        } 
+        columnas[columna].push(casilla);
     }
+    return [cuadrantes, columnas, filas]
 }
 
-crearCuadrantesFilasColumnas(tablero1);
+// Revisar si el Sudoku está completo y correcto
+function isValid(estructuras) {
+    // Iterar sobre la lista con los cuadrantes, filas y columnas del sudoku
+    for (estructura in estructuras) {
+        // Iterar por cada lista dentro de cada estructura
+        for (subestructura in estructuras[estructura]) {
+            const tempList = estructuras[estructura][subestructura]
+            // Realizar suma de los elementos de la lista
+            const total = tempList.reduce((accumulator, a) => accumulator + parseInt(a), 0);
+            if (total !== 45) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
+estructuras = crearCuadrantesFilasColumnas(tablero1);
+console.log(isValid(estructuras));
