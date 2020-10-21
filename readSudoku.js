@@ -10,19 +10,25 @@ tablero.addEventListener('click', (e)=>{
 
 // funcion de leer los valores del tablero
 function readSudoku(tablero) {
-    filas = tablero.children;
+    filasE = tablero.children;
     // Iterar por cada fila
-    for (let f=0; f < filas.length; f++) {
-        const columnas = filas[f].children;
+    for (let f=0; f < filasE.length; f++) {
+        const columnas = filasE[f].children;
         // iterar por cada columna
         for (let c=0; c < columnas.length; c++) {
             const celdas = columnas[c].children;
+            const tipoCelda = celdas[0].tagName;
             // Guardar el valor de la casilla junto con la fila y su columna
             valoresTablero[`(${f},${c})`] = {};
-            valoresTablero[`(${f},${c})`]['valor'] = celdas[0].innerHTML;
+            if (tipoCelda === 'DIV') {
+                valoresTablero[`(${f},${c})`]['valor'] = celdas[0].innerHTML;
+            } else {
+                valoresTablero[`(${f},${c})`]['valor'] = celdas[0].value;
+            }
             valoresTablero[`(${f},${c})`]['fila'] = f;
             valoresTablero[`(${f},${c})`]['columna'] = c;
         }
     }
+    console.log(valoresTablero);
     evaluateSudoku(valoresTablero);
 }

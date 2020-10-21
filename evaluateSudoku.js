@@ -161,5 +161,9 @@ function isValid(estructuras) {
     return true
 }
 
-estructuras = crearCuadrantesFilasColumnas(tablero1);
-console.log(isValid(estructuras));
+function evaluateSudoku(tablero) {
+    estructuras = crearCuadrantesFilasColumnas(tablero);
+    console.log(isValid(estructuras));
+}
+
+//evaluateSudoku(tablero1);
