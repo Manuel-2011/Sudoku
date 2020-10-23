@@ -4,7 +4,7 @@ let tablero = document.getElementById('tableroSudoku');
 let valoresTablero = {};
 
 // Cuando se haga click en el tablero llamar función de leer el tablero
-tablero.addEventListener('click', (e)=>{
+tablero.addEventListener('change', (e)=>{
     tablero = document.getElementById('tableroSudoku');
     readSudoku(tablero);
 });
@@ -34,5 +34,7 @@ function readSudoku(tablero) {
         }
     }
     console.log(valoresTablero);
-    evaluateSudoku(valoresTablero);
+    if (evaluateSudoku(valoresTablero)) {
+        winEffect();
+    };
 }

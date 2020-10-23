@@ -163,7 +163,14 @@ function isValid(estructuras) {
 
 function evaluateSudoku(tablero) {
     estructuras = crearCuadrantesFilasColumnas(tablero);
-    console.log(isValid(estructuras));
+    return isValid(estructuras);
 }
 
-//evaluateSudoku(tablero1);
+function winEffect() {
+    const divGanar = document.getElementById('ganaste');
+    divGanar.innerHTML = `
+    <div id='winMessage'>
+        Ganaste!!
+    </div>
+    `;
+}
