@@ -37,4 +37,5 @@ function readSudoku(tablero) {
     if (evaluateSudoku(valoresTablero)) {
         winEffect();
     };
+    return valoresTablero;
 }

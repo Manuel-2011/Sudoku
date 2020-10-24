@@ -82,7 +82,7 @@ tablero2 = {
     '(8,8)': {'valor': "9", 'fila': '8', 'columna': '8'},
 }
 
-function crearCuadrantesFilasColumnas(tablero) {
+function crearEstructuras(tablero) {
     let cuadrantes = {};
     let filas = {};
     let columnas = {};
@@ -189,7 +189,7 @@ function findMax(frequencias, evaluados) {
 }
 
 function solveSudoku(tablero) {
-    let estructuras = crearCuadrantesFilasColumnas(tablero);
+    let estructuras = crearEstructuras(tablero);
     let cuadrantes = estructuras[0];
     let columnas = estructuras[1];
     let filas = estructuras[2];
@@ -240,7 +240,7 @@ function solveSudoku(tablero) {
                 if (posib.length === 1) {
                     tablero[posib[0]]['valor'] = numToSearch;
                     // actualizar valores de los cuadrantes, filas y columnas
-                    estructuras = crearCuadrantesFilasColumnas(tablero);
+                    estructuras = crearEstructuras(tablero);
                     cuadrantes = estructuras[0];
                     columnas = estructuras[1];
                     filas = estructuras[2];
@@ -250,7 +250,36 @@ function solveSudoku(tablero) {
             }
         }
     }
+    console.log(tablero);
     return tablero
 }
 
-console.log(solveSudoku(tablero2));
+function renderSudoku(valoresTablero) {
+    const tablero = document.getElementById('tableroSudoku');
+    filasE = tablero.children;
+    // Iterar por cada fila
+    for (let f=0; f < filasE.length; f++) {
+        const columnas = filasE[f].children;
+        // iterar por cada columna
+        for (let c=0; c < columnas.length; c++) {
+            const celdas = columnas[c].children;
+            const tipoCelda = celdas[0].tagName;
+            // guardar el valor de la casilla
+            const valorCasilla = valoresTablero[`(${f},${c})`].valor;
+            if (tipoCelda === 'INPUT') {
+                celdas[0].value = valorCasilla;
+            }
+        }
+    }
+}
+
+// Crear variable con el boton solucionar sudoku
+let botonSolucion = document.getElementById('solucionarSudoku');
+
+// Cuando se haga click en el tablero llamar función de leer el tablero
+botonSolucion.addEventListener('click', (e)=>{
+    tablero = document.getElementById('tableroSudoku');
+    const tableroSudoku = readSudoku(tablero);
+    const tableroResuelto = solveSudoku(tableroSudoku);
+    renderSudoku(tableroResuelto);
+});
